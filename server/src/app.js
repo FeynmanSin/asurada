@@ -11,6 +11,7 @@ const path = require('path')
 const { sessionInfo, redisInfo, cookieInfo } = require('./config/config');
 
 const indexRouter = require('./routes/index');
+const adminRouter = require('./routes/admin');
 
 // 错误抛出 error handler
 onerror(app);
@@ -45,7 +46,7 @@ app.use(async (ctx, next) => {
 // routes 路由注册
 // allowedMethods用于当客户端请求接口使用错误的方法时返回405,即请求方法不匹配
 app.use(indexRouter.routes(), indexRouter.allowedMethods())
-
+app.use(adminRouter.routes(), adminRouter.allowedMethods())
 
 // error-handling 对错误进行操作
 app.on('error', (err, ctx) => {

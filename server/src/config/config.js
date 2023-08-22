@@ -12,5 +12,6 @@ module.exports = {
   },
   redisInfo: {
     all: `${REDIS_CONFIG[1]}:${REDIS_CONFIG[0]}`,// redis 地址
-  }
+  },
+  cryptoSecret: 'Sin@@&&(%^*323$&^$123&*)1&23',//md5加密密钥
 }

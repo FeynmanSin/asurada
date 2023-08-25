@@ -10,8 +10,5 @@ module.exports = {
     httpOnly: true,//不允许修改
     maxAge: 24 * 60 * 60 * 1000,//设置过期时间
   },
-  redisInfo: {
-    all: `${REDIS_CONFIG[1]}:${REDIS_CONFIG[0]}`,// redis 地址
-  },
   cryptoSecret: 'Sin@@&&(%^*323$&^$123&*)1&23',//md5加密密钥
 }

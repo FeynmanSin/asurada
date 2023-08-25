@@ -8,9 +8,10 @@ const session = require('koa-generic-session');
 const koaRedis = require('koa-redis');
 const path = require('path')
 
-const { sessionInfo, redisInfo, cookieInfo } = require('./config/config');
+const { sessionInfo, cookieInfo } = require('./config/config');
+const { REDIS_CONFIG } = require('./config/db_config');
 
-const indexRouter = require('./routes/index');
+const homeRouter = require('./routes/home');
 const adminRouter = require('./routes/admin');
 
 // 错误抛出 error handler
@@ -22,7 +23,7 @@ app.use(bodyparser({
 }));
 app.use(json());
 app.use(logger());
-app.use(require('koa-static')(`${__dirname}/public`));
+app.use(require('koa-static')(`${__dirname}/src/public`));
 app.use(require('koa-views')(`${__dirname}/views`, {
   extension: 'ejs'
 }));
@@ -31,7 +32,7 @@ app.use(session({// 处理session
   key: sessionInfo.name,// cookie name
   prefix: sessionInfo.prefix,// redis key的前缀
   cookie: cookieInfo,
-  store: koaRedis(redisInfo)//配置存储方式为redis
+  store: koaRedis(REDIS_CONFIG)//配置存储方式为redis
 }));
 
 
@@ -45,7 +46,7 @@ app.use(async (ctx, next) => {
 
 // routes 路由注册
 // allowedMethods用于当客户端请求接口使用错误的方法时返回405,即请求方法不匹配
-app.use(indexRouter.routes(), indexRouter.allowedMethods())
+app.use(homeRouter.routes(), homeRouter.allowedMethods())
 app.use(adminRouter.routes(), adminRouter.allowedMethods())
 
 // error-handling 对错误进行操作

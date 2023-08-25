@@ -13,7 +13,9 @@ module.exports = {
     },
     conf: ['txclass', 'root', ENV.isPrd ? 'xx' : '12345678']
   },
-  REDIS_CONFIG: [6379, '127.0.0.1'],
+  REDIS_CONFIG: {
+    url: 'redis://redis:6379',
+  },
   CLOUDBASE_CONFIG: {
     env: 'sin-8ggq50jzd79a5e10',
     secretId: 'AKIDCKFzWu51kFWcVBHDwRitwmPoIbidMtAn',
